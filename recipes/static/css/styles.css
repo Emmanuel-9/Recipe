@@ -1,0 +1,8 @@
+.card{
+    max-width: 550px;
+    padding: 5px;
+    max-height: 700px;
+}
+img{
+    border-radius: 50%;
+}
