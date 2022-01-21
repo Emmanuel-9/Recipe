@@ -1,12 +1,12 @@
+
 {% include 'navbar.html'%}
 {% load bootstrap4 %}
 {% block content %}
-<div class="col-md-4">
-<form method="post" >
+<div class="col-md-6">
+  <form method="post" >
     {% csrf_token %}
     {% bootstrap_form form layout="inline" %}
-    <button type="submit" class="btn btn-outline-primary">Add Recipe</button>
+    <button type="submit" class="btn btn-outline-success">Add Recipe</button>
   </form>
-  <a href="{% url 'logout' %}"> Logout </a>
 </div>  
 {% endblock %}
