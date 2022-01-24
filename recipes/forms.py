@@ -1,21 +1,22 @@
 #from distutils.command.upload import upload
+from email.policy import default
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from recipes.models import Recipe,User
 from django.db import transaction
 
 class UpdateForm(forms.Form):
-    title = forms.CharField(max_length=100)
-    image = forms.ImageField()
-    description = forms.CharField(max_length=100)
-    algorithm = forms.CharField(widget=forms.Textarea)
+    class Meta:
+        model = Recipe
+        fields = ('Title', 'Image', 'Description', 'Instructions')
+    
 
     def __str__(self):
         return self.title
 
 
-    def save_update(self, **kwargs):
-        super().save()
+    def save_update(self):
+        self.save()
 
     
 
@@ -25,13 +26,14 @@ class UpdateForm(forms.Form):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ('Title', 'Description', 'Instructions', 'pub_date')
+        fields = ('Title', 'Image', 'Description', 'Instructions')
     
 
 class ProfileForm(forms.Form):
-    name = forms.CharField()
-    email = forms.CharField()
-    recipes = forms.IntegerField()
+    name = forms.CharField(max_length=50)
+    image = forms.ImageField()
+    email = forms.EmailField()
+    recipe_count = forms.IntegerField()
 
     def __str__(self):
         return self.name
