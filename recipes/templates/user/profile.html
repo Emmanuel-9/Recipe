@@ -1,12 +1,33 @@
-{% include 'navbar.html'%}
-{% load bootstrap4 %}
-{% block content %}
-<div class="col-md-4">
-<form method="post" >
-    {% csrf_token %}
-    {% bootstrap_form form layout="inline" %}
-    <button type="submit" class="btn btn-outline-primary">Add Recipe</button>
-  </form>
-  <a href="{% url 'logout' %}"> Logout </a>
-</div>  
-{% endblock %}
+{% include 'navbar.html' %}
+  <h1> Welcome {{ user.username }}</h1>
+        {% if profile_list %}
+        {% for profile in profile_list %}
+        <div class="row">  
+            <div class="col-md-4">  
+                <div class="card">
+                    
+                    
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p class="card-title"> {{ profile.username }} |</p>
+                            <p> {{ profile.recipe_count }} </p> 
+                            <p> {{ profile.email }}</p>
+                        </div>
+                        <!--<footer class="blockquote-footer"> {{ recipe.pub_date }}</footer>-->
+                    </div>
+                </div>
+           </div>  <br>  
+        </div>       
+    
+        {% endfor%}
+        {% else %}
+        <marquee behavior="" direction="left"> No profile uploaded! </marquee><br>
+         <a href="{% url 'profile_update'%}"><button class="btn btn-outlne-primary"> Update</button></a> 
+        {% endif %}
+    
+
+
+
+
+
+        
