@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="card-text">
                             <p class="card-title"> {{ recipe.Title }}</p>
-                            <p> {{ recipe.Description }} </p> 
+                            <p id="try"> <!--{{ recipe.Description }}--> </p> 
                             <p> {{ recipe.Instructions }}</p>
                         </div>
                         <footer class="blockquote-footer"> {{ recipe.pub_date }}</footer>
@@ -34,3 +34,18 @@
         <marquee behavior="" direction="left"> No recipes available at the moment! </marquee>
         {% endif %}
     
+<script>
+    var headers = {}
+        fetch('http://localhost:3000',{
+                method : "GET",
+                // mode: 'cors',
+                // headers: headers
+            }) 
+            .then(data => { 
+                    return data.json(); 
+                }) 
+            .then(recipeCollection => { 
+                    console.log(recipeCollection); 
+                    document.getElementById("try").innerHTML = recipeCollection ;
+                });
+</script>
